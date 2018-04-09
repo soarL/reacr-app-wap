@@ -15,11 +15,27 @@ const AsyncInformation = Loadable({
   loading: loading
 })
 
+const AsyncNoticeNum = Loadable({
+  loader: () => import('@/components/Information/Notice/num'),
+  loading: loading
+})
+
+const AsyncBiddingNum = Loadable({
+  loader: () => import('@/components/Information/Bidding/num'),
+  loading: loading
+})
+
+const AsyncAboutIndex = Loadable({
+  loader: () => import('@/components/Information/About/Index/index'),
+  loading: loading
+})
+
 class App extends Component {
   
   componentDidMount() {
     // 做于预渲染
     AsyncInformation.preload()
+    AsyncNoticeNum.preload()
   }
 
   render() {
@@ -28,6 +44,9 @@ class App extends Component {
            <div className='container'>
                  <Switch>
                      <Route path="/information" component={ AsyncInformation } />
+                     <Route path="/notice/page/:id" component={ AsyncNoticeNum } />
+                     <Route path="/bidding/page/:id" component={ AsyncBiddingNum } />
+                     <Route path="/about/index" component={ AsyncAboutIndex } />
                  </Switch>
             </div>
        </HashRouter>

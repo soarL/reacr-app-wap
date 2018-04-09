@@ -20,7 +20,7 @@ class Information extends Component{
 		return(
 			<div className="information">
 				<div className='header-tab'>
-					<Tabs defaultActiveKey="1">
+					<Tabs defaultActiveKey="3">
 					  <TabPane tab="平台公告" key="1">
 					  		<Notice/>
 					  </TabPane>

@@ -12,7 +12,7 @@ class Items extends Component{
 	render(){
 		return(
 			<div className='box items'>
-				<Link to='/information/notice/:num'>
+				<Link to='/notice/page/5446465'>
 					<h4>{this.props.title}</h4>
 				</Link>
 				<Row className="detail">
