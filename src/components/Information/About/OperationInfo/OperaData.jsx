@@ -248,11 +248,45 @@ class OperaData extends Component{
 					</Row>
 				</div>
 
+				<div className='info'>
+					<Title title='逾期情况'/>
+					<Row className='row'>
+						<Col span={12} className='item'>
+							<h2>890万</h2>
+							<p>逾期金额</p>
+						</Col>
+						<Col span={12} className='item'>
+							<h2>13501</h2>
+							<p>逾期笔数</p>
+						</Col>
+						<Col span={12} className='item'>
+							<h2>233万</h2>
+							<p>逾期90天以上金额 </p>
+						</Col>
+						<Col span={12} className='item'>
+							<h2>3546</h2>
+							<p>逾期90天以上笔数</p>
+						</Col>
+					</Row>
+				</div>
+
+				<div className='lender'>
+					<Title title='代偿情况'/>
+					<Row className='row'>
+						<Col span={12}>
+							<h2>890万</h2>
+							<p>代偿金额</p>
+						</Col>
+						<Col span={12}>
+							<h2>13501</h2>
+							<p>代偿笔数</p>
+						</Col>
+					</Row>
+				</div>
 			</div>
 		)
 	}
 }
-
 
 
 export default OperaData
