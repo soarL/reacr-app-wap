@@ -30,6 +30,16 @@ const AsyncAboutIndex = Loadable({
   loading: loading
 })
 
+const AsyncAboutForeign = Loadable({
+  loader: () => import('@/components/Information/About/Foreign'),
+  loading: loading
+})
+
+const AsyncAboutOperationInfo = Loadable({
+  loader: () => import('@/components/Information/About/OperationInfo'),
+  loading: loading
+})
+
 class App extends Component {
   
   componentDidMount() {
@@ -47,6 +57,8 @@ class App extends Component {
                      <Route path="/notice/page/:id" component={ AsyncNoticeNum } />
                      <Route path="/bidding/page/:id" component={ AsyncBiddingNum } />
                      <Route path="/about/index" component={ AsyncAboutIndex } />
+                     <Route path="/about/foreign" component={ AsyncAboutForeign } />
+                     <Route path="/about/operationinfo" component={ AsyncAboutOperationInfo } />
                  </Switch>
             </div>
        </HashRouter>

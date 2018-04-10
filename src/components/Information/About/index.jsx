@@ -24,8 +24,8 @@ class OptionItem extends Component{
 
 const option = [
 	{title:'关于我们',href:'/about/index'},
-	{title:'对外公示',href:'/'},
-	{title:'运营信息',href:'/'},
+	{title:'对外公示',href:'/about/foreign'},
+	{title:'运营信息',href:'/about/operationinfo'},
 	{title:'风险管理',href:'/'},
 	{title:'电子合同',href:'/'},
 	{title:'法律法规',href:'/'},
@@ -37,7 +37,7 @@ class About extends Component{
 		return(
 			<div className='about'>
 				<div className="box logo">
-					<img src="http://asset.eph.com/src/images/public/logo.png" alt="logo"/>
+					<img src={require("./asset/logo.png")} alt="logo"/>
 				</div>
 				<Row className="box fuwu">
 					<Col span={12}>
