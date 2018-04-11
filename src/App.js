@@ -40,12 +40,40 @@ const AsyncAboutOperationInfo = Loadable({
   loading: loading
 })
 
+const AsyncAboutRisk = Loadable({
+  loader: () => import('@/components/Information/About/Risk'),
+  loading: loading
+})
+
+const AsyncAboutContract = Loadable({
+  loader: () => import('@/components/Information/About/Contract'),
+  loading: loading
+})
+
+const AsyncAboutLegal = Loadable({
+  loader: () => import('@/components/Information/About/Legal'),
+  loading: loading
+})
+
+const AsyncAboutNetClass = Loadable({
+  loader: () => import('@/components/Information/About/NetClass'),
+  loading: loading
+})
+
 class App extends Component {
   
   componentDidMount() {
     // 做于预渲染
     AsyncInformation.preload()
     AsyncNoticeNum.preload()
+    AsyncBiddingNum.preload()
+    AsyncAboutIndex.preload()
+    AsyncAboutForeign.preload()
+    AsyncAboutOperationInfo.preload()
+    AsyncAboutRisk.preload()
+    AsyncAboutContract.preload()
+    AsyncAboutLegal.preload()
+    AsyncAboutNetClass.preload()
   }
 
   render() {
@@ -59,6 +87,10 @@ class App extends Component {
                      <Route path="/about/index" component={ AsyncAboutIndex } />
                      <Route path="/about/foreign" component={ AsyncAboutForeign } />
                      <Route path="/about/operationinfo" component={ AsyncAboutOperationInfo } />
+                     <Route path="/about/risk" component={ AsyncAboutRisk } />
+                     <Route path="/about/contract" component={ AsyncAboutContract } />
+                     <Route path="/about/legal" component={ AsyncAboutLegal } />
+                     <Route path="/about/netclass" component={ AsyncAboutNetClass } />
                  </Switch>
             </div>
        </HashRouter>

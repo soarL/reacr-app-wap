@@ -77,6 +77,31 @@ export default class Server {
     })
   }
 
+  GETJSON(url,params={},option={}){
+    return new Promise((resolve, reject) => {
+      let _options = {
+        method:"get",
+        url,
+        baseURL:config.assetURL,
+        params,
+        timeout:30000,
+        validateStatus:(status)=>{
+            return status >= 200 && status < 300;
+        },
+        ...option
+      }
+      axios.request(_options).then(res => {
+        resolve(typeof res.data === 'object' ? res.data : JSON.parse(res.data))
+      },error => {
+        if(error.response){
+            reject(error.response.data)
+        }else{
+            reject(error)
+        }
+      })
+    })
+  }
+
   use(){
     console.log('自己看文档啊')    
   }

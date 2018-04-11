@@ -1,11 +1,13 @@
 import React,{ Component } from 'react'
 import ReturnHeader from '@/components/ReturnHeader'
 import Title from '@/components/Information/About/Title'
+import aboutAPI from '@/api/about'
 import { 
 	Modal,
 	Row,
 	Col,
-	Icon
+	Icon,
+	Spin
 } from 'antd'
 import PhotosShow from '@/components/PhotosShow'
 import './index.less'
@@ -18,45 +20,6 @@ const honorItems = [
 	{'src':require('./asset/honor_img_4.jpg'),title:'汇诚普惠组织机构代码证'},
 	{'src':require('./asset/honor_img_5.jpg'),title:'汇诚普惠开户许可证'},
 	{'src':require('./asset/honor_img_6.png'),title:'安全评测报告'},
-]
-
-const seniorItems = [
-	{
-		'src':require("./asset/liuzhengzhou.png"),
-		name:'刘振洲',
-		duty:'法定代表人、执行董事、总经理',
-		introduce:'中国共产党党员；15年以上500强企业及上市公司工作经历；长期从事企业财务管理、资金营运、项目融资等工作，有丰富的互联网项目规划、分析、设计及运营能力，对互联网金融行业有深刻的认识与业务积累，有很好的创意思维与企业管理能力。'},
-	{
-		'src':require("./asset/chenjingjing.png"),
-		name:'陈晶晶',
-		duty:'监事',
-		introduce:'曾就职于中国银行，近10年的银行业务管理经验，长期从事银行内控管理，熟悉银行业务政策及制度，对银行及网络借贷信息中介行业有较深的认识和理解，能够把握企业经营及业务的合规性和风险点，为人正直，品行良好。'},
-	{
-		'src':require("./asset/linliai.png"),
-		name:'林丽爱',
-		duty:'风控总监',
-		introduce:'中国共产党党员；近10年的金融从业经历，为人正直，处事谨慎，原则性强，工作认真负责，熟悉信贷业务，熟悉信贷业务市场，熟悉信贷业务政策，具有较为丰富的信贷审查经验，从事信贷审查工作期间未出现过人为因素导致的信贷风险，对信贷风险具有较高的敏感度和判断力。'},
-	{
-		'src':require("./asset/qiaolong.png"),
-		name:'唐巧龙',
-		duty:'运营总监',
-		introduce:'互联网行业资深人士，曾服务于国内大型知名互联网公司，8年以上互联网运营维护管理工作经验，具有丰富的产品运营、项目规划、整合营销、数据挖掘等团队运营管理经验。专注于互联网金融发展的研究，具备敏锐的洞察力，对制定公司的营销战略有着丰富的经验，并热爱互联网金融行业。'},
-	{
-		'src':require("./asset/chenhui.png"),
-		name:'刘晨辉',
-		duty:'技术总监',
-		introduce:'15年程序开发及管理经验，在程序开发及大数据库方面拥有丰富的工作经验。曾负责深圳政府应急系统的项目开发、深圳集时通讯客户管理系统的二次开发。韵达快递物流管理系统开发、唐狮服饰集团数据库挖掘开发（BI）及维护等项目。'},
-	{
-		'src':require("./asset/zhangjingxiong.png"),
-		name:'张锦雄',
-		duty:'财务负责人',
-		introduce:'3年以上财务管理工作经营，熟悉金融企业财务核算，能够独立开展资金管理工作及投融资相关工作。对互联网金融行业的业务模式和内控管理有较深的理解，熟悉预算管理和税务管理等工作。'}
-]
-
-const PartnerItems = [
-	{src:require('./asset/baofoo.png')},
-	{src:require('./asset/ancun.png')},
-	{src:require('./asset/penyuan.png')},
 ]
 
 class HonorItem extends Component{
@@ -112,6 +75,10 @@ class AboutIndex extends Component{
 			honorIndex:0,
 			seniorIndex:0,
 			seniorOverflow:{height:'240px'},
+			seniorItems:[],
+			partnerItems:[],
+			loading:true,
+
 		}
 	}
 
@@ -139,8 +106,13 @@ class AboutIndex extends Component{
 	openSeniorPhotoShow = (index)=>{
 		this.setState(a=>({seniorModal:!this.state.seniorModal,seniorIndex:index}))
 	}
-	componentDidMount() {
-		
+	async componentDidMount() {
+		let data = await aboutAPI.getIndexData()
+		this.setState({
+			seniorItems:data.seniorItems,
+			partnerItems:data.partnerItems,
+			loading:false
+		})
 	}
 	render(){
 		return(
@@ -239,11 +211,13 @@ class AboutIndex extends Component{
 						<Title title='公司高管'/>
 
 						<div className='overflow-img-box' style={this.state.seniorOverflow}>
+							<Spin tip='Loading...' spinning={this.state.loading}>
 							<Row className='img-box'>
 								{
-									seniorItems.map((value,index)=><SeniorItem src={value.src} name={value.name} duty={value.duty} key={index} handle={this.openSeniorPhotoShow.bind(this,index)} />)
+									this.state.seniorItems.map((value,index)=><SeniorItem src={value.src} name={value.name} duty={value.duty} key={index} handle={this.openSeniorPhotoShow.bind(this,index)} />)
 								}
 							</Row>
+							</Spin>
 						</div>
 						<div className='more' onClick={this.SeniorOverflow}>
 							<Icon type={this.state.seniorIconType} />
@@ -255,7 +229,7 @@ class AboutIndex extends Component{
 				          visible={this.state.seniorModal}
 				          onCancel={this.openSeniorPhotoShow}
 				        >
-				        	<PhotosShow imgArr={ seniorItems } defaultIndex={this.state.seniorIndex} mode='senior'/>
+				        	<PhotosShow imgArr={ this.state.seniorItems } defaultIndex={this.state.seniorIndex} mode='senior'/>
 				        </Modal>
 					</div>
 					<div className="stock">
@@ -282,11 +256,13 @@ class AboutIndex extends Component{
 					</div>
 					<div className="partner">
 						<Title title='合作机构'/>
-						<Row>
-							{
-								PartnerItems.map((value,index)=><PartnerItem  src={value.src} key={index}/>)
-							}
-						</Row>
+						<Spin tip='Loading...' spinning={this.state.loading}>
+							<Row>
+								{
+									this.state.partnerItems.map((value,index)=><PartnerItem  src={value.src} key={index}/>)
+								}
+							</Row>
+						</Spin>
 					</div>
 				</div>
 			</div>

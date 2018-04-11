@@ -26,10 +26,10 @@ const option = [
 	{title:'关于我们',href:'/about/index'},
 	{title:'对外公示',href:'/about/foreign'},
 	{title:'运营信息',href:'/about/operationinfo'},
-	{title:'风险管理',href:'/'},
-	{title:'电子合同',href:'/'},
-	{title:'法律法规',href:'/'},
-	{title:'网贷课堂',href:'/'}
+	{title:'风险管理',href:'/about/risk'},
+	{title:'电子合同',href:'/about/contract'},
+	{title:'法律法规',href:'/about/legal'},
+	{title:'网贷课堂',href:'/about/netclass'}
 ]
 
 class About extends Component{

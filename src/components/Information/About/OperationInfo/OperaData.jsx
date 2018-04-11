@@ -85,7 +85,7 @@ class OperaData extends Component{
 	}
 	render(){
 		return(
-			<div className='OperaData'>
+			<div className='opera-data'>
 				<div className='info'>
 					<Title title='平台运营信息'/>
 					<p className='jiezhi'>（截止2018-01-11）</p>

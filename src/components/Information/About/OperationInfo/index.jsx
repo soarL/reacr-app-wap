@@ -1,6 +1,7 @@
 import React,{ Component } from 'react'
 import ReturnHeader from '@/components/ReturnHeader'
 import OperaData from './OperaData'
+import Report from './Report'
 import {
 	Tabs
 } from 'antd'
@@ -20,8 +21,8 @@ class OperationInfo extends Component{
 						   <TabPane tab="运营数据" key="1">
 								<OperaData/>
 						   </TabPane>
-						   <TabPane tab="运营报告" key="3">
-						   		运营报告
+						   <TabPane tab="运营报告" key="2">
+						   		<Report/>
 						   </TabPane>
 						 </Tabs>
 					</div>
