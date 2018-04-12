@@ -15,6 +15,7 @@ const  axios = require('axios')
 export default class Server {
 
   GET(url,params={},option={}){
+
     return new Promise((resolve, reject) => {
       let _options = {
         method:"get",
