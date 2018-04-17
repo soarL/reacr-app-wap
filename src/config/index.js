@@ -14,7 +14,7 @@ if(ENV==="development"){
 	// 生产环境中接口地址
 	baseURL='/'
 	// 打包后文件存放的目录。
-	assetURL = "/"
+	assetURL = "/static"
 }
 
 export {

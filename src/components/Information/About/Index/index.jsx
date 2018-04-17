@@ -11,7 +11,7 @@ import {
 } from 'antd'
 import PhotosShow from '@/components/PhotosShow'
 import './index.less'
-
+import { assetURL } from '@/config'
 
 const honorItems = [
 	{'src':require('./asset/honor_img_1.jpg'),title:'汇诚普惠营业执照'},
@@ -40,7 +40,7 @@ class SeniorItem extends Component{
 		return(
 			<Col span={12} className='img-box-1'>
 				<div className='senior-border' onClick={this.props.handle}>
-					<img src={this.props.src} alt={this.props.name}/>
+					<img src={ assetURL + this.props.src} alt={this.props.name}/>
 					<h3>{this.props.name}</h3>
 					<p>{this.props.duty}</p>
 					<div>详细介绍<Icon type='right'/></div>
@@ -55,7 +55,7 @@ class PartnerItem extends Component{
 		return(
 			<Col span={12}>
 				<div className="partner-item-border">
-					<img src={this.props.src} alt={this.props.src}/>
+					<img src={assetURL + this.props.src} alt={this.props.src}/>
 				</div>
 			</Col>
 		)
@@ -249,7 +249,7 @@ class AboutIndex extends Component{
 					<div className='contact-us'>
 						<Title title='联系我们'/>
 						<div  className='iframe'>
-							<iframe src='./map.html' title='asdasd'></iframe>
+							<iframe src={ assetURL + '/map.html'} title='asdasd'></iframe>
 						</div>
 						<p>地址：福建省福州市鼓楼区五四路国贸广场2楼H单元</p>
 						<p>电话：400-080-8885</p>

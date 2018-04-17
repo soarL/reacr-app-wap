@@ -48,17 +48,16 @@ class Storage extends Server{
 	}
 	get(key){
 		let data = this.Storage.getItem(key)
-		data = JSON.parse(data)
 		if(!data){
 			return false
 		}
-		if(!data.version){
+		if(!JSON.parse(data).version){
 			return false
 		}
-		if(!data.version===this.version){
-			return false
+		if(JSON.parse(data).version===this.version){
+			return JSON.parse(data)
 		}
-		return data
+		return false
 	}
 }
 

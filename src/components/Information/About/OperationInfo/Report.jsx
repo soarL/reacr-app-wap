@@ -5,13 +5,15 @@ import {
 	Row,
 	Col
 } from 'antd'
+import { assetURL } from '@/config'
+ 
 
 class ItemChild extends Component{
 	render(){
 		return(
 			<Col span={12} className='item-child'>
 				<div>
-					<img src={this.props.src} alt={this.props.title}/>
+					<img src={assetURL + this.props.src} alt={this.props.title}/>
 				</div>
 				<h2>{this.props.title}</h2>
 			</Col>
