@@ -10,9 +10,6 @@ import Notice from './Notice'
 import Bidding from './Bidding'
 import About from './About'
 
-
-
-
 const TabPane = Tabs.TabPane;
 
 class Information extends Component{
