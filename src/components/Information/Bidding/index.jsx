@@ -6,13 +6,13 @@ import {
 	Col
 } from 'antd'
 import './index.less'
-
+import aboutAPI from '@/api/about'
 
 class Items extends Component{
 	render(){
 		return(
 			<div className='box items'>
-				<Link to='/bidding/page/:id'>
+				<Link to={'/bidding/page/' + this.props.news_id}>
 					<h4>{this.props.title}</h4>
 				</Link>
 				<Row className="detail">
@@ -28,26 +28,25 @@ class Items extends Component{
 	}
 }
 
-const arr = [
-	{title:'2018年3月29新标预告',eye:600,time:'2018-1-20 09:40:30'},
-	{title:'2018年3月29新标预告',eye:600,time:'2018-1-20 09:40:30'},
-	{title:'2018年3月29新标预告',eye:600,time:'2018-1-20 09:40:30'},
-	{title:'2018年3月29新标预告',eye:520,time:'2018-1-20 09:40:30'},
-	{title:'2018年3月29新标预告',eye:600,time:'2018-1-20 09:40:30'},
-	{title:'2018年3月29新标预告',eye:600,time:'2018-1-20 09:40:30'},
-	{title:'2018年3月29新标预告',eye:600,time:'2018-1-20 09:40:30'},
-	{title:'2018年3月29新标预告',eye:600,time:'2018-1-20 09:40:30'},
-	{title:'2018年3月29新标预告',eye:600,time:'2018-1-20 09:40:30'},
-]
-
 
 class Bidding extends Component{
-
+	constructor(props){
+		super(props)
+		this.state={
+			arr:[]
+		}
+	}
+	async componentDidMount() {
+		let data = await aboutAPI.getAnnounce()
+		this.setState({
+			arr:data
+		})
+	}
 
 	render(){
 		return(
 			<div className='notice'>
-				{arr.map((value,index)=><Items key={ index } title={value.title} eye={value.eye} time={value.time}/>)}
+				{this.state.arr.map((value,index)=><Items key={ index }  title={value.news_title} eye={value.news_num} time={value.news_time} news_id={value.id}/>)}
 			</div>
 		)
 	}

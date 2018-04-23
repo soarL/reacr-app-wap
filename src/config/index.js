@@ -12,9 +12,9 @@ if(ENV==="development"){
 	assetURL=''
 }else{
 	// 生产环境中接口地址
-	baseURL='http://api.hcjrfw.com/api'
+	baseURL='/'
 	// 打包后文件存放的目录。
-	assetURL = "http://192.168.1.132"
+	assetURL = "/static"
 }
 
 export {

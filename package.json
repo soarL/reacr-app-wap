@@ -2,7 +2,7 @@
   "name": "app_user",
   "version": "0.1.0",
   "private": true,
-  "homepage": "/",
+  "homepage": "/static",
   "dependencies": {
     "antd": "^3.0.1",
     "autoprefixer": "7.1.6",
@@ -115,5 +115,5 @@
     "less": "^2.7.3",
     "less-loader": "^4.0.5"
   },
-  "proxy": "http://www.eph.com"
+  "proxy": "http://wap.eph.com/"
 }

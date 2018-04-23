@@ -1,6 +1,6 @@
 import React, { Component} from 'react'
 import ReturnHeader from '@/components/ReturnHeader' 
-
+import aboutAPI from '@/api/about'
 
 class Num extends Component{
 	constructor(props){
@@ -12,12 +12,13 @@ class Num extends Component{
 			content:''
 		}
 	}
-	componentWillMount() {
+	async componentWillMount() {
+		let data = await aboutAPI.getAnnounceShow(this.props.match.params.id)
 		this.setState({
-			title:'新标预告',
+			title:data.news_title,
 			author:'汇诚',
-			time:'2018-01-05',
-			content:'有新标了'
+			time:data.news_time,
+			content:data.news_body
 		})
 	}
 	render(){
@@ -29,8 +30,7 @@ class Num extends Component{
 						<h3>{this.state.title}</h3>
 						<p><span>作者：{this.state.author}</span>   <span>时间：{this.state.time}</span> </p>					
 					</div>
-					<div className='content'>
-						{this.state.content}
+					<div className='content' dangerouslySetInnerHTML={{__html:this.state.content}}>
 					</div>
 				</div>
 			</div>

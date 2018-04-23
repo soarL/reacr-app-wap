@@ -10,13 +10,12 @@ import {
 
 class OperaData extends Component{
 
-	componentDidMount() {
-		const sex = echarts.init(document.getElementById('sex'));
-		const age = echarts.init(document.getElementById('age'));
-
+	componentDidUpdate() {
+		const sex = echarts.init(document.getElementById('sex'))
+		const age = echarts.init(document.getElementById('age'))
 		sex.setOption({
 			backgroundColor: '#fff', //图表的配置颜色
-			color: ['#dbdbdb', '#3b8ce1'], //每一项对应的颜色
+			color: ['#3b8ce1', '#dbdbdb'], //每一项对应的颜色
 		    series : [{
                     name:'男女比例',  //名字--用于tooltip的显示
                     type:'pie',    //类型--饼状图
@@ -27,11 +26,11 @@ class OperaData extends Component{
                     zlevel:2,
                     data:[  //系列中的数据内容数组
                         {
-                            value:69.65,     //数据值总的值
+                            value:this.props.data.data.investerManRate,     //数据值总的值
                             name:'男'  //数据项名称。
                         },
                         {
-                            value:30.35,     //剩下的值
+                            value:this.props.data.data.investerWomenRate,     //剩下的值
                             name:'女'
                         }
                     ],
@@ -53,27 +52,27 @@ class OperaData extends Component{
                     zlevel:2,
                     data:[  //系列中的数据内容数组
                         {
-                            value:5.35,     //数据值总的值
+                            value:this.props.data.data.invester18,     //数据值总的值
                             name:'25岁以下'  //数据项名称。
                         },
                         {
-                            value:15.65,     //剩下的值
+                            value:this.props.data.data.invester26,     //剩下的值
                             name:'26~30岁'
                         },
                         {
-                            value:21.23,     //剩下的值
+                            value:this.props.data.data.invester31,     //剩下的值
                             name:'31~35岁'
                         },
                         {
-                            value:10.89,     //剩下的值
+                            value:this.props.data.data.invester36,     //剩下的值
                             name:'36~40岁'
                         },
                         {
-                            value:11.10,     //剩下的值
+                            value:this.props.data.data.invester41,     //剩下的值
                             name:'41~45岁'
                         },
                         {
-                            value:9.23,     //剩下的值
+                            value:this.props.data.data.invester46,     //剩下的值
                             name:'46~50岁'
                         }
                     ],
@@ -84,26 +83,27 @@ class OperaData extends Component{
 		});
 	}
 	render(){
+		const data = this.props.data.data
 		return(
 			<div className='opera-data'>
 				<div className='info'>
 					<Title title='平台运营信息'/>
-					<p className='jiezhi'>（截止2018-01-11）</p>
+					<p className='jiezhi'>（截止{data.date}）</p>
 					<Row className='row'>
 						<Col span={12} className='item'>
-							<h2>986.86万</h2>
+							<h2>{data.total ? data.total + 1586.9 : " 0 "}万</h2>
 							<p>累计交易总额</p>
 						</Col>
 						<Col span={12} className='item'>
-							<h2>986.86万</h2>
+							<h2>{data.count ? data.count + 47 : " 0 "}</h2>
 							<p>累计交易笔数</p>
 						</Col>
 						<Col span={12} className='item'>
-							<h2>346.82万</h2>
+							<h2>{data.totalZoneEr ? data.totalZoneEr: " 0 "}万</h2>
 							<p>累计借款总余额 </p>
 						</Col>
 						<Col span={12} className='item'>
-							<h2>756.86万</h2>
+							<h2>{data.totalBlack ? data.totalBlack : " 0 "}万</h2>
 							<p>关联关系借款余额</p>
 						</Col>
 					</Row>
@@ -113,19 +113,19 @@ class OperaData extends Component{
 					<Title title='借款人情况'/>
 					<Row className='row'>
 						<Col span={12} className='item'>
-							<h2>850,660.00</h2>
+							<h2>{data.loanerCount ? data.loanerCount + 42 : " 0 "}</h2>
 							<p>累计借款人数量</p>
 						</Col>
 						<Col span={12} className='item'>
-							<h2>687,812.00</h2>
+							<h2>{data.nLoanerCount ? data.nLoanerCount : " 0 "}</h2>
 							<p>当前借款人数量</p>
 						</Col>
 						<Col span={12} className='item'>
-							<h2>0.01%</h2>
+							<h2>{data.tenLoaner ? data.tenLoaner : " 0 "}%</h2>
 							<p>前十大借款人待还金额占比 </p>
 						</Col>
 						<Col span={12} className='item'>
-							<h2>0.00%</h2>
+							<h2>{data.firstLoaner ? data.firstLoaner : " 0 "}%</h2>
 							<p>最大单一借款人待还金额占比</p>
 						</Col>
 					</Row>
@@ -135,11 +135,11 @@ class OperaData extends Component{
 					<Title title='出借人情况'/>
 					<Row className='row'>
 						<Col span={12}>
-							<h2>850,660.00</h2>
+							<h2>{data.investerCount ? data.investerCount + 37 : " 0 "}</h2>
 							<p>累计出借人数量</p>
 						</Col>
 						<Col span={12}>
-							<h2>687,812.00</h2>
+							<h2>{data.nInvesterCount ? data.nInvesterCount : " 0 "}</h2>
 							<p>当前借款人数量</p>
 						</Col>
 					</Row>
@@ -152,19 +152,19 @@ class OperaData extends Component{
 								<Col span={14}>
 									<Row>
 										<Col span={8}>
-											女
+											男
 										</Col>
 										<Col span={12}>
-											30.35%
+											{data.investerManRate ? data.investerManRate : " 0.00 "}%
 										</Col>
 										<Col span={4}>
 											<span className="dian" style={{backgroundColor:"#3b8ce1"}}></span>
 										</Col>
 										<Col span={8}>
-											男
+											女
 										</Col>
 										<Col span={12}>
-											69.65%
+											{data.investerWomenRate ? data.investerWomenRate : " 0.00 "}%
 										</Col>
 										<Col span={4}>
 											<span className="dian" style={{backgroundColor:"#dbdbdb"}}></span>
@@ -185,7 +185,7 @@ class OperaData extends Component{
 											25岁以下
 										</Col>
 										<Col span={12}>
-											 5.35% 
+											 {data.invester18 ? data.invester18 : " 0.00 "}%
 										</Col>
 										<Col span={4}>
 											<span className="dian" style={{backgroundColor:"#e8d67d"}}></span>
@@ -194,7 +194,7 @@ class OperaData extends Component{
 											26~30岁
 										</Col>
 										<Col span={12}>
-											15.65%
+											{data.invester26 ? data.invester26 : " 0.00 "}%
 										</Col>
 										<Col span={4}>
 											<span className="dian" style={{backgroundColor:"#a1cf87"}}></span>
@@ -204,7 +204,7 @@ class OperaData extends Component{
 											31~35岁
 										</Col>
 										<Col span={12}>
-											21.23%
+											{data.invester31 ? data.invester31 : " 0.00 "}%
 										</Col>
 										<Col span={4}>
 											<span className="dian" style={{backgroundColor:"#eaac7b"}}></span>
@@ -214,7 +214,7 @@ class OperaData extends Component{
 											36~40岁
 										</Col>
 										<Col span={12}>
-											10.89%
+											{data.invester36 ? data.invester36 : " 0.00 "}%
 										</Col>
 										<Col span={4}>
 											<span className="dian" style={{backgroundColor:"#3b8ce1"}}></span>
@@ -224,7 +224,7 @@ class OperaData extends Component{
 											41~45岁
 										</Col>
 										<Col span={12}>
-											11.10%
+											{data.invester41 ? data.invester41 : " 0.00 "}%
 										</Col>
 										<Col span={4}>
 											<span className="dian" style={{backgroundColor:"#c2c7d6"}}></span>
@@ -234,7 +234,7 @@ class OperaData extends Component{
 											46~50岁
 										</Col>
 										<Col span={12}>
-											9.23%
+											{data.invester46 ? data.invester46 : " 0.00 "}%
 										</Col>
 										<Col span={4}>
 											<span className="dian" style={{backgroundColor:"#dbdbdb"}}></span>
@@ -252,19 +252,19 @@ class OperaData extends Component{
 					<Title title='逾期情况'/>
 					<Row className='row'>
 						<Col span={12} className='item'>
-							<h2>890万</h2>
+							<h2>{data.delayTotal ? data.delayTotal : " 0"}万</h2>
 							<p>逾期金额</p>
 						</Col>
 						<Col span={12} className='item'>
-							<h2>13501</h2>
+							<h2>{data.delay ? data.delay : " 0"}</h2>
 							<p>逾期笔数</p>
 						</Col>
 						<Col span={12} className='item'>
-							<h2>233万</h2>
+							<h2>0.00万</h2>
 							<p>逾期90天以上金额 </p>
 						</Col>
 						<Col span={12} className='item'>
-							<h2>3546</h2>
+							<h2>0</h2>
 							<p>逾期90天以上笔数</p>
 						</Col>
 					</Row>
@@ -274,11 +274,11 @@ class OperaData extends Component{
 					<Title title='代偿情况'/>
 					<Row className='row'>
 						<Col span={12}>
-							<h2>890万</h2>
+							<h2>0万</h2>
 							<p>代偿金额</p>
 						</Col>
 						<Col span={12}>
-							<h2>13501</h2>
+							<h2>0</h2>
 							<p>代偿笔数</p>
 						</Col>
 					</Row>
